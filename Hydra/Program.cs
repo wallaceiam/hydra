@@ -67,7 +67,7 @@ namespace Hydra
                 //var abPrice = priceData.Result[ab].Ask[0];
                 //var bcPrice = priceData.Result[bc].Bid[0];
                 //var cdPrice = priceData.Result[cd].Ask[0];
-                //var dePrice = priceData.Result[bc].Bid[0];
+                //var dePrice = priceData.Result[de].Bid[0];
                 var abPrice = priceData.Result[ab].Last[0];
                 var bcPrice = priceData.Result[bc].Last[0];
                 var cdPrice = priceData.Result[cd].Last[0];
@@ -82,8 +82,9 @@ namespace Hydra
                 if(perc > 0.05M)
                     Console.WriteLine($"{path}\t\t{ending}\t{perc:P2}");
             }
-            
-            Console.Read();
+
+            Console.WriteLine("Done");
+            Console.ReadLine();
         }
     }
 }
