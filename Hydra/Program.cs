@@ -74,10 +74,16 @@ namespace Hydra
                 // var bcPrice = priceData.Result[bc].Bid[0];
                 // var cdPrice = priceData.Result[cd].Ask[0];
                 // var dePrice = priceData.Result[de].Bid[0];
-                path.AtoBPrice = priceData.Result[path.AtoB].Last[0];
-                path.BtoCPrice = priceData.Result[path.BtoC].Last[0];
-                path.CtoDPrice = priceData.Result[path.CtoD].Last[0];
-                path.DtoEPrice = priceData.Result[path.DtoE].Last[0];
+
+                path.AtoBPrice = priceData.Result[path.AtoB].Ask[0];
+                path.BtoCPrice = priceData.Result[path.BtoC].Bid[0];
+                path.CtoDPrice = priceData.Result[path.CtoD].Ask[0];
+                path.DtoEPrice = priceData.Result[path.DtoE].Bid[0];
+
+                // path.AtoBPrice = priceData.Result[path.AtoB].Last[0];
+                // path.BtoCPrice = priceData.Result[path.BtoC].Last[0];
+                // path.CtoDPrice = priceData.Result[path.CtoD].Last[0];
+                // path.DtoEPrice = priceData.Result[path.DtoE].Last[0];
 
                 var abAmount = starting / path.AtoBPrice;
                 var bcAmount = abAmount * path.BtoCPrice;
@@ -85,7 +91,7 @@ namespace Hydra
                 path.Ending = cdAmount * path.DtoEPrice;
             }
 
-            foreach (var path in paths.Where(x => x.Perc > 0.02M).OrderByDescending(x => x.Ending))
+            foreach (var path in paths.Where(x => x.Perc > 0.0064M).OrderByDescending(x => x.Ending))
             {
                 Console.WriteLine($"{path.AtoB.PadRight(8, ' ')}->{path.BtoC.PadRight(8, ' ')}->{path.CtoD.PadRight(8, ' ')}->{path.DtoE.PadRight(8, ' ')}:\t{path.Ending:0.00}\t{path.Perc:P2}");
                 Console.WriteLine($"{priceData.Result[path.AtoB].Volume[0].ToString().PadRight(8, ' ')}->{priceData.Result[path.BtoC].Volume[0].ToString().PadRight(8, ' ')}->{priceData.Result[path.CtoD].Volume[0].ToString().PadRight(8, ' ')}->{priceData.Result[path.DtoE].Volume[0].ToString().PadRight(8, ' ')}");
